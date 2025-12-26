@@ -4,7 +4,7 @@
 ## 10. Implementation of programs using pointer arithmetic.
 # Ex.No:21
   Implement a C program to demonstrate call by value and call by reference by swapping two integers using separate functions.
-# Date : 
+# Date : 15.11.25
 # Aim:
  To implement a C program that illustrates the difference between call by value and call by reference by swapping two integer variables using two separate functions.
 # Algorithm:
@@ -39,7 +39,46 @@
 ### Step 12: 
   Stop
 # Program:
+~~~
+#include <stdio.h>
+
+// Function to swap using call by value
+void swapByValue(int a, int b) {
+    int temp = a;
+    a = b;
+    b = temp;
+    printf("Inside swapByValue: a = %d, b = %d\n", a, b);
+}
+
+// Function to swap using call by reference
+void swapByReference(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main() {
+    int x, y;
+
+    printf("Enter two integers: ");
+    scanf("%d %d", &x, &y);
+
+    printf("\nBefore swap: x = %d, y = %d\n", x, y);
+
+    // Swap using call by value
+    swapByValue(x, y);
+    printf("After swapByValue in main: x = %d, y = %d\n", x, y);
+
+    // Swap using call by reference
+    swapByReference(&x, &y);
+    printf("After swapByReference in main: x = %d, y = %d\n", x, y);
+
+    return 0;
+}
+~~~
 # Output:
+![img](https://github.com/user-attachments/assets/585630a8-ee33-425a-9899-efb279788caa)
+
 # Result: 
   Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -48,7 +87,7 @@
 # IAPR-5- Module 5 - FoC
 # Ex.No:22
   Implement a C program to generate the Fibonacci series using a recursive function. The program should accept a positive integer n and display the first n terms of the Fibonacci sequence.
-# Date : 
+# Date : 19.11.25
 # Aim:
   To implement a C program that uses a recursive function to generate and display the Fibonacci series for a given number of terms.
 # Algorithm:
@@ -77,7 +116,39 @@
 ### Step 10:
   Stop
 # Program:
+~~~
+#include <stdio.h>
+
+// Recursive function to find nth Fibonacci number
+int fibonacci(int n) {
+    if (n == 0) return 0;      // Base case: 0th term
+    if (n == 1) return 1;      // Base case: 1st term
+    return fibonacci(n - 1) + fibonacci(n - 2); // Recursive call
+}
+
+int main() {
+    int n;
+
+    printf("Enter the number of terms: ");
+    scanf("%d", &n);
+
+    if (n <= 0) {
+        printf("Please enter a positive integer.\n");
+        return 1;
+    }
+
+    printf("Fibonacci series (%d terms):\n", n);
+    for (int i = 0; i < n; i++) {
+        printf("%d ", fibonacci(i));
+    }
+
+    printf("\n");
+    return 0;
+}
+~~~
 # Output:
+![img](https://github.com/user-attachments/assets/fda86ae7-ff8f-4496-8f24-e764d4554793)
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -119,7 +190,44 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 12:
   Stop
 # Program:
+~~~
+#include <stdio.h>
+
+// Recursive function to print numbers from lower to upper
+void printSequence(int lower, int upper) {
+    if (lower > upper)
+        return;  // Base case: stop when lower exceeds upper
+
+    printf("%d ", lower);
+
+    printSequence(lower + 2, upper); // Recursive call with step 2
+}
+
+int main() {
+    int lower, upper;
+
+    printf("Enter lower limit: ");
+    scanf("%d", &lower);
+    printf("Enter upper limit: ");
+    scanf("%d", &upper);
+
+    // Adjust lower limit to start with even or odd as needed
+    if (lower % 2 != upper % 2) {
+        printf("No numbers with the same parity in this range.\n");
+        return 0;
+    }
+
+    printf("Sequence:\n");
+    printSequence(lower, upper);
+    printf("\n");
+
+    return 0;
+}
+~~~
 # Output:
+
+![img](https://github.com/user-attachments/assets/dd47dbb6-29f8-4a0c-9c8a-9b87b8fe678b)
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -161,7 +269,42 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 11:
   Stop
 # Program:
+~~~
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int n, sum = 0;
+    int *arr;
+
+    printf("Enter the number of integers: ");
+    scanf("%d", &n);
+
+    // Dynamically allocate memory using calloc
+    arr = (int *)calloc(n, sizeof(int));
+    if (arr == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+
+    // Input integers
+    printf("Enter %d integers:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+        sum += arr[i];  // Compute sum
+    }
+
+    printf("Sum of the integers: %d\n", sum);
+
+    // Free dynamically allocated memory
+    free(arr);
+
+    return 0;
+}
+~~~
 # Output:
+![img](https://github.com/user-attachments/assets/07c8e1c0-4ff9-4c7b-992a-a5a0b1ec04e4)
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -197,6 +340,39 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 10:
   Stop
 # Program:
+~~~
+#include <stdio.h>
+
+// Function to display array elements
+void displayArray(int arr[], int n) {
+    printf("Array elements are:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int n;
+
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];  // Declare array
+
+    printf("Enter %d integers:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Call function to display array
+    displayArray(arr, n);
+
+    return 0;
+}
+~~~
 # Output:
+![im](https://github.com/user-attachments/assets/ec16c221-8f07-4f84-afba-4d89b95874ce)
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
